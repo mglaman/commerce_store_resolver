@@ -32,6 +32,22 @@ class StoreResolverMethod extends Plugin {
   public $label;
 
   /**
+   * The description of the language negotiation plugin.
+   *
+   * @ingroup plugin_translatable
+   *
+   * @var \Drupal\Core\Annotation\Translation
+   */
+  public $description;
+
+  /**
+   * The default weight of the language negotiation plugin.
+   *
+   * @var int
+   */
+  public $weight;
+
+  /**
    * A required module that must exist for the plugin to be considered.
    *
    * @var string optional

@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * @StoreResolverMethod(
  *   id = "country",
- *   label = "Country"
+ *   label = "Country",
+ *   weight = 10
  * )
  *
  * Deprecates module `commerce_country_store`

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @StoreResolverMethod(
  *   id = "domain",
  *   label = "Domain",
+ *   weight = 0
  * )
  *
  * Deprecates module `commerce_country_domain`

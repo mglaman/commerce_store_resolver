@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * @StoreResolverMethod(
  *   id = "geoip",
  *   label = "GeoIP",
- *   module = "geoip"
+ *   module = "geoip",
+ *   weight = 20,
  * )
  *
  * Deprecates module `commerce_country_store`

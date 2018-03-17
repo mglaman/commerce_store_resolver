@@ -42,7 +42,6 @@ class StoreResolverMethodManager extends DefaultPluginManager implements StoreRe
     parent::alterDefinitions($definitions);
   }
 
-
   /**
    * {@inheritdoc}
    */
