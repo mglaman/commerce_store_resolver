@@ -1,0 +1,4 @@
+services:
+  plugin.manager.store_resolver_method:
+    class: Drupal\commerce_store_resolver\StoreResolverMethodManager
+    parent: default_plugin_manager
