@@ -31,4 +31,11 @@ class StoreResolverMethod extends Plugin {
    */
   public $label;
 
+  /**
+   * A required module that must exist for the plugin to be considered.
+   *
+   * @var string optional
+   */
+  public $module;
+
 }

@@ -28,6 +28,22 @@ class StoreResolverMethodManager extends DefaultPluginManager implements StoreRe
   }
 
   /**
+   * @inheritDoc
+   */
+  protected function alterDefinitions(&$definitions) {
+    foreach ($definitions as $key => $definition) {
+      if (!empty($definition['module'])) {
+        $module_dependency = $definition['module'];
+        if (!$this->moduleHandler->moduleExists($module_dependency)) {
+          unset($definitions[$key]);
+        }
+      }
+    }
+    parent::alterDefinitions($definitions);
+  }
+
+
+  /**
    * {@inheritdoc}
    */
   public function resolve() {
