@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *   id = "country",
  *   label = "Country"
  * )
+ *
+ * Deprecates module `commerce_country_store`
  */
 class Country extends StoreResolverMethodBase {
 
