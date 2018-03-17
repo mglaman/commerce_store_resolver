@@ -3,5 +3,6 @@ services:
     class: Drupal\commerce_store_resolver\StoreResolverMethodManager
     parent: default_plugin_manager
     tags:
+    # @todo should be an intermediate service which checks config.
       - { name: commerce_store.store_resolver}
 
