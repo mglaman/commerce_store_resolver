@@ -128,4 +128,28 @@ class CountryStoreResolverMethodTest extends EntityKernelTestBase {
     $this->assertEquals($store->id(), $this->store2->id());
   }
 
+  public function testIfMissing() {
+    $manager = $this->container->get('plugin.manager.store_resolver_method');
+    $store = $manager->resolve();
+
+    $this->assertNotInstanceOf(StoreInterface::class, $store);
+  }
+
+  /**
+   * Tests the resolver based on country code header.
+   */
+  public function testResolverCloufFront() {
+    // Fake CloudFlare header.
+    $request = Request::create('');
+    $request->server->set('HTTP_CLOUDFRONT_VIEWER_COUNTRY', 'US');
+    // Push the request to the request stack so `current_route_match` works.
+    $this->container->get('request_stack')->push($request);
+
+    $manager = $this->container->get('plugin.manager.store_resolver_method');
+    $store = $manager->resolve();
+
+    $this->assertInstanceOf(StoreInterface::class, $store);
+    $this->assertEquals($store->id(), $this->store1->id());
+  }
+
 }

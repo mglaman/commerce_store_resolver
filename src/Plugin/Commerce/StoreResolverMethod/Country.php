@@ -39,18 +39,29 @@ class Country extends StoreResolverMethodBase {
    */
   public function resolve() {
     $current_request = $this->requestStack->getCurrentRequest();
-    if ($current_request->server->has('HTTP_CF_IPCOUNTRY')) {
-      $country_code = Xss::filter($current_request->server->get('HTTP_CF_IPCOUNTRY'));
-      // @todo could not get entity query on billing_countries to work.
-      $stores = $this->storeStorage->loadMultiple();
-      /** @var \Drupal\commerce_store\Entity\StoreInterface $store */
-      foreach ($stores as $store) {
-        $available = $store->getBillingCountries();
-        if (in_array($country_code, $available)) {
-          return $store;
+
+    foreach ($this->getKeys() as $server_key) {
+      if ($current_request->server->has($server_key)) {
+        $country_code = Xss::filter($current_request->server->get($server_key));
+        // @todo could not get entity query on billing_countries to work.
+        $stores = $this->storeStorage->loadMultiple();
+        /** @var \Drupal\commerce_store\Entity\StoreInterface $store */
+        foreach ($stores as $store) {
+          $available = $store->getBillingCountries();
+          if (in_array($country_code, $available)) {
+            return $store;
+          }
         }
       }
     }
+  }
+
+  protected function getKeys() {
+    // @todo allow custom. Fast.ly and Akamai make you provide/customize.
+    return [
+      'HTTP_CF_IPCOUNTRY',
+      'HTTP_CLOUDFRONT_VIEWER_COUNTRY',
+    ];
   }
 
 }
